@@ -1,0 +1,80 @@
+MULTIPLIER
+
+
++PM 1: +5% peek meter (Max 80%)
++PM 2: +10% peek meter (Max 80%)
++PM 3: +15% peek meter (Max 80%)
++PM 4: +20% peek meter (Max 80%)
++PM 5: +25% peek meter (Max 80%)
++PM 6: +30% peek meter (Max 80%)
++PM 7: +35% peek meter (Max 80%)
++PM 8: +40% peek meter (Max 80%) +PM 9: +45% peek meter (Max 80%)
++PM 10: +50% peek meter (Max 80%)
+
+
+
+RFLPM 1: Peek meter refills 4% faster (Max 70%)
+RFLPM 2: Peek meter refills 8% faster (Max 70%)
+RFLPM 3: Peek meter refills 12% faster (Max 70%)
+RFLPM 4: Peek meter refills 16% faster (Max 70%)
+RFLPM 5: Peek meter refills 20% faster (Max 70%)
+RFLPM 6: Peek meter refills 24% faster (Max 70%)
+RFLPM 7: Peek meter refills 28% faster (Max 70%)
+RFLPM 8: Peek meter refills 32% faster (Max 70%) RFLPM 9: Peek meter refills 36% faster (Max 70%)
+RFLPM 10: Peek meter refills 40% faster (Max 70%)
+
+
++TD 1 :+3% trade delay per multiplier (Max 45%)  
++TD 2: +6% trade delay per multiplier (Max 45%)  
++TD 3: +9% trade delay per multiplier (Max 45%)
++TD 4: +12% trade delay per multiplier (Max 45%)
++TD 5: +15% trade delay per multiplier (Max 45%)
++TD 6: +18% trade delay per multiplier (Max 45%)
++TD 7: +21% trade delay per multiplier (Max 45%)
++TD 8: +24% trade delay per multiplier (Max 45%) +TD 9: +27% trade delay per multiplier (Max 45%)
++TD 10: +30% trade delay per multiplier (Max 45%)
+
+
+RFL TD 1: Trade Delay refills 2.5% faster (Max 40%)
+RFL TD 2: Trade Delay refills 5% faster (Max 40%)
+RFL TD 3: Trade Delay refills 7.5% faster (Max 40%)
+RFL TD 4: Trade Delay refills 10% faster (Max 40%)
+RFL TD 5: Trade Delay refills 12.5% faster (Max 40%)
+RFL TD 6: Trade Delay refills 15% faster (Max 40%)
+RFL TD 7: Trade Delay refills 17.5% faster (Max 40%)
+RFL TD 8: Trade Delay refills 20% faster (Max 40%) RFL TD 9: Trade Delay refills 22.5% faster (Max 40%)
+RFL TD 10: Trade Delay refills 25% faster (Max 40%)
+
+
+
++$ 1: +2% profits on your trades
++$ 2: +4% profits on your trades
++$ 3: +6% profits on your trades
++$ 4: +8% profits on your trades
++$ 5: +10% profits on your trades
++$ 6: +12% profits on your trades
++$ 7: +14% profits on your trades
++$ 8: +16% profits on your trades +$ 9: +18% profits on your trades
++$ 10: +20% profits on your trades
+
+
++AB 1: +10% Action Bar per trade 
++AB 2: +20% Action Bar per trade  
++AB 3: +30% Action Bar per trade 
++AB 4: +40% Action Bar per trade 
++AB 5: +50% Action Bar per trade 
++AB 6: +60% Action Bar per trade 
++AB 7: +70% Action Bar per trade 
++AB 8: +80% Action Bar per trade  +AB 9: +90% Action Bar per trade 
++AB 10: +100% Action Bar per trade 
+
+
+-TE 1: Next tradelixer costs 5% less 
+-TE 2: Next tradelixer costs 10% less 
+-TE 3: Next tradelixer costs 15% less 
+-TE 4: Next tradelixer costs 20% less
+-TE 5: Next tradelixer costs 25% less
+-TE 6: Next tradelixer costs 30% less
+-TE 7: Next tradelixer costs 35% less
+-TE 8: Next tradelixer costs 40% less -TE 9: Next tradelixer costs 45% less
+-TE 10: Next tradelixer costs 50% less
