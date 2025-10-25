@@ -69,6 +69,31 @@ const BonusCard = ({ bonus, onDelete, onToggle }) => {
               {bonus.multiplier_type}
             </span>
           )}
+          {bonus.min_value !== null && bonus.min_value !== undefined && (
+            <span className="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-medium">
+              Min: {bonus.min_value}
+            </span>
+          )}
+          {bonus.max_value !== null && bonus.max_value !== undefined && (
+            <span className="px-3 py-1 bg-indigo-50 text-indigo-700 rounded-full text-xs font-medium">
+              Max: {bonus.max_value}
+            </span>
+          )}
+          {bonus.duration !== null && bonus.duration !== undefined && (
+            <span className="px-3 py-1 bg-cyan-50 text-cyan-700 rounded-full text-xs font-medium">
+              Duration: {bonus.duration}m
+            </span>
+          )}
+          {bonus.min_duration !== null && bonus.min_duration !== undefined && (
+            <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-xs font-medium">
+              Min Dur: {bonus.min_duration}m
+            </span>
+          )}
+          {bonus.max_duration !== null && bonus.max_duration !== undefined && (
+            <span className="px-3 py-1 bg-teal-50 text-teal-700 rounded-full text-xs font-medium">
+              Max Dur: {bonus.max_duration}m
+            </span>
+          )}
           <span
             className={`px-3 py-1 rounded-full text-xs font-medium ${
               bonus.isActive

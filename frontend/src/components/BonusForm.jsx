@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { ACTIONBAR_CATEGORIES, RARITY_OPTIONS } from "../constants/actionbar";
 
-const BonusForm = ({ initialData, onSubmit, isLoading }) => {
+const BonusForm = ({ initialData, onSubmit, isLoading, isEdit = false }) => {
   const [formData, setFormData] = useState(
     initialData || {
       name: "",
@@ -15,6 +15,11 @@ const BonusForm = ({ initialData, onSubmit, isLoading }) => {
       bonus_type: "actionbar",
       rarity: "common",
       isActive: true,
+      min_value: "",
+      max_value: "",
+      duration: "",
+      min_duration: "",
+      max_duration: "",
     }
   );
 
@@ -37,6 +42,13 @@ const BonusForm = ({ initialData, onSubmit, isLoading }) => {
       max: formData.max === "" ? null : Number(formData.max),
       multiplier_type:
         formData.multiplier_type === "" ? null : formData.multiplier_type,
+      min_value: formData.min_value === "" ? null : Number(formData.min_value),
+      max_value: formData.max_value === "" ? null : Number(formData.max_value),
+      duration: formData.duration === "" ? null : Number(formData.duration),
+      min_duration:
+        formData.min_duration === "" ? null : Number(formData.min_duration),
+      max_duration:
+        formData.max_duration === "" ? null : Number(formData.max_duration),
     };
 
     onSubmit(submitData);
@@ -76,7 +88,10 @@ const BonusForm = ({ initialData, onSubmit, isLoading }) => {
               value={formData.key}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              disabled={isEdit}
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+                isEdit ? "bg-gray-100 cursor-not-allowed" : ""
+              }`}
               placeholder="e.g., PB_1"
             />
           </div>
@@ -90,7 +105,10 @@ const BonusForm = ({ initialData, onSubmit, isLoading }) => {
               value={formData.category}
               onChange={handleChange}
               required
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              disabled={isEdit}
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+                isEdit ? "bg-gray-100 cursor-not-allowed" : ""
+              }`}
             >
               <option value="">Select a category</option>
               {ACTIONBAR_CATEGORIES.map((cat) => (
@@ -109,7 +127,10 @@ const BonusForm = ({ initialData, onSubmit, isLoading }) => {
               name="bonus_type"
               value={formData.bonus_type}
               onChange={handleChange}
-              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              disabled={isEdit}
+              className={`w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 ${
+                isEdit ? "bg-gray-100 cursor-not-allowed" : ""
+              }`}
             >
               <option value="actionbar">Action Bar</option>
               <option value="multiplier">Multiplier</option>
@@ -235,6 +256,96 @@ const BonusForm = ({ initialData, onSubmit, isLoading }) => {
               </div>
             </>
           )}
+        </div>
+      </div>
+
+      {/* Duration and Range Fields */}
+      <div className="bg-white rounded-lg shadow p-6">
+        <h3 className="text-lg font-semibold mb-4 text-gray-900">
+          Value Ranges & Duration
+        </h3>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Min Value
+            </label>
+            <input
+              type="number"
+              name="min_value"
+              value={formData.min_value}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="e.g., 1"
+            />
+            <p className="text-xs text-gray-500 mt-1">Minimum integer value</p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Max Value
+            </label>
+            <input
+              type="number"
+              name="max_value"
+              value={formData.max_value}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="e.g., 100"
+            />
+            <p className="text-xs text-gray-500 mt-1">Maximum integer value</p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Duration (minutes)
+            </label>
+            <input
+              type="number"
+              name="duration"
+              value={formData.duration}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="e.g., 5"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Duration in minutes (integer)
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Min Duration (minutes)
+            </label>
+            <input
+              type="number"
+              name="min_duration"
+              value={formData.min_duration}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="e.g., 3"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Minimum duration in minutes
+            </p>
+          </div>
+
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Max Duration (minutes)
+            </label>
+            <input
+              type="number"
+              name="max_duration"
+              value={formData.max_duration}
+              onChange={handleChange}
+              className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500"
+              placeholder="e.g., 10"
+            />
+            <p className="text-xs text-gray-500 mt-1">
+              Maximum duration in minutes
+            </p>
+          </div>
         </div>
       </div>
 

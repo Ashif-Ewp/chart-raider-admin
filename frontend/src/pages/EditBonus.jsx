@@ -35,7 +35,8 @@ const EditBonus = () => {
       setLoading(true);
       await actionBarAPI.updateBonus(id, formData);
       toast.success("Bonus updated successfully!");
-      navigate("/bonuses");
+      // Refresh the bonus data to show updated values without navigating away
+      await fetchBonus();
     } catch (error) {
       console.error("Error updating bonus:", error);
       const errorMessage =
@@ -89,11 +90,20 @@ const EditBonus = () => {
           description: bonus.description || "",
           value: bonus.value || "",
           count: bonus.count || "",
+          max: bonus.max || "",
+          multiplier_type: bonus.multiplier_type || "",
+          bonus_type: bonus.bonus_type,
           rarity: bonus.rarity,
           isActive: bonus.isActive,
+          min_value: bonus.min_value || "",
+          max_value: bonus.max_value || "",
+          duration: bonus.duration || "",
+          min_duration: bonus.min_duration || "",
+          max_duration: bonus.max_duration || "",
         }}
         onSubmit={handleSubmit}
         isLoading={loading}
+        isEdit={true}
       />
     </div>
   );

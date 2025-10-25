@@ -74,6 +74,26 @@ const actionBarBonusSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.Mixed,
       default: {},
     },
+    min_value: {
+      type: Number,
+      default: null,
+    },
+    max_value: {
+      type: Number,
+      default: null,
+    },
+    duration: {
+      type: Number,
+      default: null,
+    },
+    min_duration: {
+      type: Number,
+      default: null,
+    },
+    max_duration: {
+      type: Number,
+      default: null,
+    },
   },
   {
     timestamps: true,
