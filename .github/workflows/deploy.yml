@@ -1,0 +1,46 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches: [ "main" ]          # change if your default branch is different
+  workflow_dispatch:              # allow manual trigger from Actions tab
+
+# Only one deploy at a time
+concurrency:
+  group: deploy-prod
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout (for metadata only)
+        uses: actions/checkout@v4
+
+      - name: Deploy over SSH (pull + run script)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}      # e.g. ec2-xx-xx-xx.compute.amazonaws.com
+          username: ${{ secrets.EC2_USER }}  # usually "ubuntu"
+          key: ${{ secrets.EC2_SSH_KEY }}    # private key that matches EC2 authorized_keys
+          port: ${{ secrets.EC2_PORT || 22 }}
+          script_stop: true
+          script: |
+            set -euo pipefail
+            cd /home/ubuntu/admin-panel
+
+            echo "[deploy] fetch latest"
+            git fetch --all --prune
+            git reset --hard origin/master   # change if using another branch
+
+            echo "[deploy] ensure script is executable"
+            chmod +x test.sh
+
+            # (Optional) recreate backend .env from a secret:
+            # echo "${{ secrets.BACKEND_ENV }}" > backend/.env
+
+            echo "[deploy] run test.sh"
+            ./test.sh
+
+            echo "[deploy] pm2 status"
+            pm2 status || true
