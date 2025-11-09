@@ -4,6 +4,11 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
 const actionBarRoutes = require("./routes/actionBarRoutes");
+const equipmentRoutes = require("./routes/equipmentRoutes");
+const matchAnnouncementRoutes = require("./routes/matchAnnouncementRoutes");
+const ticketCategoryRoutes = require("./routes/ticketCategoryRoutes");
+const ticketRoutes = require("./routes/ticketRoutes");
+const ticketMessageRoutes = require("./routes/ticketMessageRoutes");
 
 const app = express();
 
@@ -17,6 +22,11 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/actionbar", actionBarRoutes);
+app.use("/api/equipment", equipmentRoutes);
+app.use("/api/match-announcements", matchAnnouncementRoutes);
+app.use("/api/ticket-categories", ticketCategoryRoutes);
+app.use("/api/tickets", ticketRoutes);
+app.use("/api/ticket-messages", ticketMessageRoutes);
 
 // Health check
 app.get("/health", (req, res) => {
