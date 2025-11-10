@@ -19,6 +19,14 @@ import EditTicketCategory from "./pages/EditTicketCategory";
 import TicketsPage from "./pages/TicketsPage";
 import CreateTicket from "./pages/CreateTicket";
 import TicketChatPage from "./pages/TicketChatPage";
+import PrivacyRequestsPage from "./pages/PrivacyRequestsPage";
+import OptOutRequestsPage from "./pages/OptOutRequestsPage";
+import CreatePrivacyRequest from "./pages/CreatePrivacyRequest";
+import CreateOptOutRequest from "./pages/CreateOptOutRequest";
+import ShopCasesPage from "./pages/ShopCasesPage";
+import ShopItemsPage from "./pages/ShopItemsPage";
+import ShopTicketsPage from "./pages/ShopTicketsPage";
+import RaiderPassPage from "./pages/RaiderPassPage";
 
 function App() {
   return (
@@ -56,6 +64,20 @@ function App() {
           <Route path="/tickets" element={<TicketsPage />} />
           <Route path="/tickets/create" element={<CreateTicket />} />
           <Route path="/tickets/chat/:id" element={<TicketChatPage />} />
+          <Route path="/privacy-requests" element={<PrivacyRequestsPage />} />
+          <Route path="/opt-out-requests" element={<OptOutRequestsPage />} />
+          <Route
+            path="/privacy-requests/create"
+            element={<CreatePrivacyRequest />}
+          />
+          <Route
+            path="/opt-out-requests/create"
+            element={<CreateOptOutRequest />}
+          />
+          <Route path="/shop/cases" element={<ShopCasesPage />} />
+          <Route path="/shop/items" element={<ShopItemsPage />} />
+          <Route path="/shop/tickets" element={<ShopTicketsPage />} />
+          <Route path="/shop/raider-pass" element={<RaiderPassPage />} />
         </Routes>
       </Layout>
       <ToastContainer
