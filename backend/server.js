@@ -9,6 +9,12 @@ const matchAnnouncementRoutes = require("./routes/matchAnnouncementRoutes");
 const ticketCategoryRoutes = require("./routes/ticketCategoryRoutes");
 const ticketRoutes = require("./routes/ticketRoutes");
 const ticketMessageRoutes = require("./routes/ticketMessageRoutes");
+const privacyRequestRoutes = require("./routes/privacyRequestRoutes");
+const optOutRequestRoutes = require("./routes/optOutRequestRoutes");
+const shopCaseRoutes = require("./routes/shopCaseRoutes");
+const shopItemRoutes = require("./routes/shopItemRoutes");
+const shopTicketRoutes = require("./routes/shopTicketRoutes");
+const raiderPassRoutes = require("./routes/raiderPassRoutes");
 
 const app = express();
 
@@ -27,6 +33,12 @@ app.use("/api/match-announcements", matchAnnouncementRoutes);
 app.use("/api/ticket-categories", ticketCategoryRoutes);
 app.use("/api/tickets", ticketRoutes);
 app.use("/api/ticket-messages", ticketMessageRoutes);
+app.use("/api/privacy-requests", privacyRequestRoutes);
+app.use("/api/opt-out-requests", optOutRequestRoutes);
+app.use("/api/shop/cases", shopCaseRoutes);
+app.use("/api/shop/items", shopItemRoutes);
+app.use("/api/shop/tickets", shopTicketRoutes);
+app.use("/api/shop/raider-pass", raiderPassRoutes);
 
 // Health check
 app.get("/health", (req, res) => {

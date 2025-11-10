@@ -163,7 +163,7 @@ const Dashboard = () => {
       </div>
 
       {/* Quick Actions */}
-      <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg shadow-md p-8 text-white">
+      {/* <div className="bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg shadow-md p-8 text-white">
         <h3 className="text-2xl font-bold mb-2">Quick Actions</h3>
         <p className="mb-6 opacity-90">
           Manage your action bar bonuses efficiently
@@ -182,7 +182,7 @@ const Dashboard = () => {
             View All Bonuses
           </button>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

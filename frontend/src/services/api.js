@@ -76,4 +76,39 @@ export const ticketMessageAPI = {
   deleteTicketMessage: (id) => api.delete(`/ticket-messages/${id}`),
 };
 
+// Privacy Requests API
+export const privacyRequestAPI = {
+  getPrivacyRequests: (params) => api.get("/privacy-requests", { params }),
+  createPrivacyRequest: (data) => api.post("/privacy-requests", data),
+  deletePrivacyRequest: (id) => api.delete(`/privacy-requests/${id}`),
+};
+
+// Opt-Out Requests API
+export const optOutRequestAPI = {
+  getOptOutRequests: (params) => api.get("/opt-out-requests", { params }),
+  createOptOutRequest: (data) => api.post("/opt-out-requests", data),
+  deleteOptOutRequest: (id) => api.delete(`/opt-out-requests/${id}`),
+};
+
+// Shop API
+export const shopCaseAPI = {
+  getCases: () => api.get("/shop/cases"),
+  updateCase: (id, data) => api.put(`/shop/cases/${id}`, data),
+};
+
+export const shopItemAPI = {
+  getItems: () => api.get("/shop/items"),
+  updateItem: (id, data) => api.put(`/shop/items/${id}`, data),
+};
+
+export const shopTicketAPI = {
+  getTickets: () => api.get("/shop/tickets"),
+  updateTicket: (id, data) => api.put(`/shop/tickets/${id}`, data),
+};
+
+export const raiderPassAPI = {
+  getPasses: () => api.get("/shop/raider-pass"),
+  updatePass: (id, data) => api.put(`/shop/raider-pass/${id}`, data),
+};
+
 export default api;

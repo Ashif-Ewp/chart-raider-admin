@@ -14,6 +14,14 @@ import {
   HelpCircle,
   Tag,
   Ticket,
+  ShieldCheck,
+  Lock,
+  UserX,
+  ShoppingBag,
+  Boxes,
+  PackageOpen,
+  Percent,
+  Crown,
 } from "lucide-react";
 
 const Layout = ({ children }) => {
@@ -22,6 +30,8 @@ const Layout = ({ children }) => {
     allBonus: false,
     announcement: false,
     support: false,
+    privacy: false,
+    shop: false,
   });
 
   const isActive = (path) => {
@@ -42,6 +52,30 @@ const Layout = ({ children }) => {
 
   const isTicketActive = () => {
     return location.pathname.startsWith("/tickets");
+  };
+
+  const isPrivacyRequestsActive = () => {
+    return location.pathname.startsWith("/privacy-requests");
+  };
+
+  const isOptOutActive = () => {
+    return location.pathname.startsWith("/opt-out-requests");
+  };
+
+  const isShopCasesActive = () => {
+    return location.pathname.startsWith("/shop/cases");
+  };
+
+  const isShopItemsActive = () => {
+    return location.pathname.startsWith("/shop/items");
+  };
+
+  const isShopTicketsActive = () => {
+    return location.pathname.startsWith("/shop/tickets");
+  };
+
+  const isRaiderPassActive = () => {
+    return location.pathname.startsWith("/shop/raider-pass");
   };
 
   const toggleSection = (section) => {
@@ -82,7 +116,20 @@ const Layout = ({ children }) => {
             <Home size={18} />
             <span className="font-medium">Dashboard</span>
           </Link>
-
+          {/* Equipment Items */}
+          <div className="mt-6">
+            <Link
+              to="/equipment"
+              className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+                isEquipmentActive()
+                  ? "bg-purple-50 text-purple-700 border border-purple-200"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+              <Shield size={18} className="text-purple-500" />
+              <span className="font-medium">Equipment items</span>
+            </Link>
+          </div>
           {/* All Bonus Section */}
           <div className="mt-6">
             <button
@@ -126,21 +173,6 @@ const Layout = ({ children }) => {
                 </Link>
               </div>
             )}
-          </div>
-
-          {/* Equipment Items */}
-          <div className="mt-6">
-            <Link
-              to="/equipment"
-              className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
-                isEquipmentActive()
-                  ? "bg-purple-50 text-purple-700 border border-purple-200"
-                  : "text-gray-600 hover:bg-gray-100"
-              }`}
-            >
-              <Shield size={18} className="text-purple-500" />
-              <span className="font-medium">Equipment items</span>
-            </Link>
           </div>
 
           {/* Announcement Section */}
@@ -221,6 +253,118 @@ const Layout = ({ children }) => {
               </div>
             )}
           </div>
+
+          {/* Privacy Center Section */}
+          <div className="mt-6">
+            <button
+              onClick={() => toggleSection("privacy")}
+              className="flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <div className="flex items-center space-x-3">
+                <ShieldCheck size={18} className="text-indigo-500" />
+                <span className="font-semibold">Privacy Center</span>
+              </div>
+              {expandedSections.privacy ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
+            </button>
+
+            {expandedSections.privacy && (
+              <div className="ml-6 mt-2 space-y-1">
+                <Link
+                  to="/privacy-requests"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isPrivacyRequestsActive()
+                      ? "bg-indigo-50 text-indigo-700 border border-indigo-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <Lock size={16} />
+                  <span>Privacy Requests</span>
+                </Link>
+                <Link
+                  to="/opt-out-requests"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isOptOutActive()
+                      ? "bg-indigo-50 text-indigo-700 border border-indigo-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <UserX size={16} />
+                  <span>Right to Opt Out</span>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Shop Section */}
+          <div className="mt-6">
+            <button
+              onClick={() => toggleSection("shop")}
+              className="flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <div className="flex items-center space-x-3">
+                <ShoppingBag size={18} className="text-amber-500" />
+                <span className="font-semibold">Shop</span>
+              </div>
+              {expandedSections.shop ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
+            </button>
+
+            {expandedSections.shop && (
+              <div className="ml-6 mt-2 space-y-1">
+                <Link
+                  to="/shop/cases"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isShopCasesActive()
+                      ? "bg-amber-50 text-amber-700 border border-amber-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <Boxes size={16} />
+                  <span>Cases</span>
+                </Link>
+                <Link
+                  to="/shop/items"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isShopItemsActive()
+                      ? "bg-amber-50 text-amber-700 border border-amber-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <PackageOpen size={16} />
+                  <span>Items</span>
+                </Link>
+                <Link
+                  to="/shop/tickets"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isShopTicketsActive()
+                      ? "bg-amber-50 text-amber-700 border border-amber-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <Percent size={16} />
+                  <span>Tickets</span>
+                </Link>
+                <Link
+                  to="/shop/raider-pass"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isRaiderPassActive()
+                      ? "bg-amber-50 text-amber-700 border border-amber-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <Crown size={16} />
+                  <span>Raider Pass</span>
+                </Link>
+              </div>
+            )}
+          </div>
         </nav>
 
         {/* Footer */}
@@ -262,6 +406,18 @@ const Layout = ({ children }) => {
                 {location.pathname === "/tickets" && "Tickets"}
                 {location.pathname === "/tickets/create" && "Create Ticket"}
                 {location.pathname.includes("/tickets/chat") && "Ticket Chat"}
+                {location.pathname === "/privacy-requests" &&
+                  "Privacy Requests"}
+                {location.pathname === "/opt-out-requests" &&
+                  "Right to Opt Out"}
+                {location.pathname === "/privacy-requests/create" &&
+                  "Create Privacy Request (Test)"}
+                {location.pathname === "/opt-out-requests/create" &&
+                  "Create Opt-Out Request (Test)"}
+                {location.pathname === "/shop/cases" && "Shop Cases"}
+                {location.pathname === "/shop/items" && "Shop Items"}
+                {location.pathname === "/shop/tickets" && "Shop Tickets"}
+                {location.pathname === "/shop/raider-pass" && "Raider Pass"}
               </h2>
               <p className="text-gray-600 text-sm mt-1">
                 {location.pathname === "/" && "Overview of your bonus system"}
@@ -292,6 +448,22 @@ const Layout = ({ children }) => {
                   "Create a test ticket"}
                 {location.pathname.includes("/tickets/chat") &&
                   "Chat with user about this ticket"}
+                {location.pathname === "/privacy-requests" &&
+                  "Collect, review, and manage privacy submissions (local-only testing)"}
+                {location.pathname === "/opt-out-requests" &&
+                  "Track opt-out requests captured locally for testing"}
+                {location.pathname === "/privacy-requests/create" &&
+                  "Use this form to create a local-only privacy request for testing"}
+                {location.pathname === "/opt-out-requests/create" &&
+                  "Use this form to create a local-only opt-out request for testing"}
+                {location.pathname === "/shop/cases" &&
+                  "Monitor and edit case inventory levels, pricing, and discounts."}
+                {location.pathname === "/shop/items" &&
+                  "Review and adjust item availability and pricing."}
+                {location.pathname === "/shop/tickets" &&
+                  "Manage ticket bundle stock and price points."}
+                {location.pathname === "/shop/raider-pass" &&
+                  "Fine-tune Raider Pass inventory and promotional pricing."}
               </p>
             </div>
           </div>
