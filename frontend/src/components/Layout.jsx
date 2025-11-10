@@ -60,9 +60,7 @@ const Layout = ({ children }) => {
           <div className="flex items-center space-x-2">
             <div className="text-3xl">⚡</div>
             <div>
-              <h1 className="text-xl font-bold text-gray-900">
-                Action Bar Admin
-              </h1>
+              <h1 className="text-xl font-bold text-gray-900">Admin Panel</h1>
               <p className="text-xs text-gray-500">Bonus Management</p>
             </div>
           </div>
