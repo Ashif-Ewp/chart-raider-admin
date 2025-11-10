@@ -1,0 +1,2 @@
+create another meu with 2 submenu(privacy request in mode(first_name,last_name,email,country,state,request_type[confirm_processing,access,delete,correct,other,myself,someone_else],additional_information ],right to opt out in model(first_name,last_name,email]
+only data will come from user end from form for testing keep in add,view,delete
