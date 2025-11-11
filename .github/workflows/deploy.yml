@@ -38,6 +38,15 @@ jobs:
 
             # (Optional) recreate backend .env from a secret:
             # echo "${{ secrets.BACKEND_ENV }}" > backend/.env
+            echo "DB_TYPE=${{ secrets.DB_TYPE }}" >> .env
+
+            # These commands (>>) append to the file
+            echo "PG_HOST=${{ secrets.PG_HOST }}" >> .env
+            echo "PG_PORT=${{ secrets.PG_PORT }}" >> .env
+            echo "PG_USER=${{ secrets.PG_USER }}" >> .env
+            echo "PG_PASSWORD=${{ secrets.PG_PASSWORD }}" >> .env
+            echo "PG_DATABASE=${{ secrets.PG_DATABASE }}" >> .env
+            echo "PG_SSL=${{ secrets.PG_SSL }}" >> .env
 
             echo "[deploy] run test.sh"
             ./test.sh
