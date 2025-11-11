@@ -3,6 +3,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const connectDB = require("./config/db");
+const { connectPostgres } = require("./config/postgres");
 const actionBarRoutes = require("./routes/actionBarRoutes");
 const equipmentRoutes = require("./routes/equipmentRoutes");
 const matchAnnouncementRoutes = require("./routes/matchAnnouncementRoutes");
@@ -17,9 +18,6 @@ const shopTicketRoutes = require("./routes/shopTicketRoutes");
 const raiderPassRoutes = require("./routes/raiderPassRoutes");
 
 const app = express();
-
-// Connect to MongoDB
-connectDB();
 
 // Middleware
 app.use(cors());
@@ -39,6 +37,8 @@ app.use("/api/shop/cases", shopCaseRoutes);
 app.use("/api/shop/items", shopItemRoutes);
 app.use("/api/shop/tickets", shopTicketRoutes);
 app.use("/api/shop/raider-pass", raiderPassRoutes);
+const foreignRoutes = require("./routes/postgresRoutes");
+app.use("/api/foreign", foreignRoutes);
 
 // Health check
 app.get("/health", (req, res) => {
@@ -69,7 +69,17 @@ app.use((req, res) => {
 
 const PORT = process.env.PORT || 5000;
 
-app.listen(PORT, () => {
+app.listen(PORT, async () => {
+  // Connect to databases depending on DB_TYPE
+  // DB_TYPE can be: 'mongo' (default), 'postgres', or 'both'
+  const DB_TYPE = process.env.DB_TYPE || "mongo";
+  if (DB_TYPE === "mongo" || DB_TYPE === "both") {
+    await connectDB();
+  }
+  if (DB_TYPE === "postgres" || DB_TYPE === "both") {
+    await connectPostgres();
+  }
+
   console.log(
     `Server running in ${
       process.env.NODE_ENV || "development"

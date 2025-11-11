@@ -1,14 +1,15 @@
 import React from "react";
 import ShopInventoryPage from "../components/ShopInventoryPage";
-import { shopCaseAPI } from "../services/api";
+import { pgShopCaseAPI } from "../services/api";
 
 const ShopCasesPage = () => {
   return (
     <ShopInventoryPage
       title="Shop Cases"
       subtitle="Manage availability and pricing for featured cases."
-      fetchItems={shopCaseAPI.getCases}
-      updateItem={shopCaseAPI.updateCase}
+      // Use Postgres-backed API for shop cases (fetch rows from Postgres 'shop_cases')
+      fetchItems={pgShopCaseAPI.getCases}
+      updateItem={pgShopCaseAPI.updateCase}
     />
   );
 };

@@ -13,6 +13,7 @@ const ShopInventoryPage = ({
   subtitle,
   fetchItems,
   updateItem,
+  type = "items",
   refreshLabel = "Refresh",
 }) => {
   const [items, setItems] = useState([]);
@@ -27,8 +28,9 @@ const ShopInventoryPage = ({
       setItems(
         data.map((item) => ({
           ...item,
-          stock: formatNumber(item.stock),
-          price: formatNumber(item.price),
+          // Use Postgres column names: quantity and amount
+          quantity: formatNumber(item.quantity ?? item.stock),
+          amount: formatNumber(item.amount ?? item.price),
           discount: formatNumber(item.discount),
         }))
       );
@@ -62,13 +64,26 @@ const ShopInventoryPage = ({
     setSavingId(item._id);
     try {
       const payload = {
-        stock: Number(item.stock) || 0,
-        price: Number(item.price) || 0,
+        quantity: Number(item.quantity) || 0,
+        amount: Number(item.amount) || 0,
         discount: Number(item.discount) || 0,
       };
+      console.log({ payload });
       await updateItem(item._id, payload);
       toast.success("Inventory updated");
-      await loadItems();
+      // Update local state to keep current order instead of re-fetching from server
+      setItems((prev) =>
+        prev.map((it) =>
+          it._id === item._id
+            ? {
+                ...it,
+                quantity: formatNumber(payload.quantity),
+                amount: formatNumber(payload.amount),
+                discount: formatNumber(payload.discount),
+              }
+            : it
+        )
+      );
     } catch (error) {
       console.error("Failed to update inventory", error);
       const message =
@@ -109,10 +124,10 @@ const ShopInventoryPage = ({
                     Name
                   </th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    Stock
+                    Quantity
                   </th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                    Price
+                    Amount
                   </th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-gray-500 uppercase tracking-wider">
                     Discount
@@ -126,15 +141,19 @@ const ShopInventoryPage = ({
                 {items.map((item) => (
                   <tr key={item._id}>
                     <td className="px-4 py-3 text-sm text-gray-900 font-medium">
-                      {item.name}
+                      {item?.name?.split("_").join(" ") || "Unnamed Item"}
                     </td>
                     <td className="px-4 py-3">
                       <input
                         type="number"
                         min="0"
-                        value={item.stock}
+                        value={item.quantity}
                         onChange={(e) =>
-                          handleFieldChange(item._id, "stock", e.target.value)
+                          handleFieldChange(
+                            item._id,
+                            "quantity",
+                            e.target.value
+                          )
                         }
                         className="w-24 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                       />
@@ -144,9 +163,9 @@ const ShopInventoryPage = ({
                         type="number"
                         min="0"
                         step="0.01"
-                        value={item.price}
+                        value={item.amount}
                         onChange={(e) =>
-                          handleFieldChange(item._id, "price", e.target.value)
+                          handleFieldChange(item._id, "amount", e.target.value)
                         }
                         className="w-24 px-2 py-1 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary-500 text-sm"
                       />

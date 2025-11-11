@@ -3,7 +3,6 @@ import { Link, useLocation } from "react-router-dom";
 import {
   Home,
   Package,
-  Plus,
   ChevronDown,
   ChevronRight,
   Zap,
@@ -32,6 +31,7 @@ const Layout = ({ children }) => {
     support: false,
     privacy: false,
     shop: false,
+    settings: false,
   });
 
   const isActive = (path) => {
@@ -76,6 +76,10 @@ const Layout = ({ children }) => {
 
   const isRaiderPassActive = () => {
     return location.pathname.startsWith("/shop/raider-pass");
+  };
+
+  const isSettingsActive = () => {
+    return location.pathname.startsWith("/settings");
   };
 
   const toggleSection = (section) => {
@@ -359,6 +363,40 @@ const Layout = ({ children }) => {
                 >
                   <Crown size={16} />
                   <span>Raider Pass</span>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Settings Section */}
+          <div className="mt-6">
+            <button
+              onClick={() => toggleSection("settings")}
+              className="flex items-center justify-between w-full px-3 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors"
+            >
+              <div className="flex items-center space-x-3">
+                <Shield size={18} className="text-slate-500" />
+                <span className="font-semibold">Settings</span>
+              </div>
+              {expandedSections.settings ? (
+                <ChevronDown size={16} />
+              ) : (
+                <ChevronRight size={16} />
+              )}
+            </button>
+
+            {expandedSections.settings && (
+              <div className="ml-6 mt-2 space-y-1">
+                <Link
+                  to="/settings/ticket-queue"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isSettingsActive()
+                      ? "bg-slate-50 text-slate-700 border border-slate-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <Ticket size={16} />
+                  <span>Ticket Queue</span>
                 </Link>
               </div>
             )}

@@ -69,6 +69,15 @@ export const ticketAPI = {
   deleteTicket: (id) => api.delete(`/tickets/${id}`),
 };
 
+// Postgres foreign table API
+export const postgresAPI = {
+  // fetch rows from a table: /api/foreign/rows?table=your_table
+  getTableRows: (table, params = {}) =>
+    api.get(`/foreign/rows`, { params: { table, ...params } }),
+  // update a row in a table: PUT /api/foreign/rows with body { table, id_column, id_value, data }
+  updateTableRow: (payload) => api.put(`/foreign/rows`, payload),
+};
+
 // Ticket Message API
 export const ticketMessageAPI = {
   getTicketMessages: (ticketId) => api.get(`/ticket-messages/${ticketId}`),
@@ -109,6 +118,155 @@ export const shopTicketAPI = {
 export const raiderPassAPI = {
   getPasses: () => api.get("/shop/raider-pass"),
   updatePass: (id, data) => api.put(`/shop/raider-pass/${id}`, data),
+};
+
+// Postgres-backed shop wrappers. These adapt the postgresAPI responses into the shape
+// expected by ShopInventoryPage (response.data.data = array)
+export const pgShopCaseAPI = {
+  getCases: async () => {
+    const resp = await postgresAPI.getTableRows("shop_cases", { limit: 500 });
+    const rows = resp.data?.rows ?? [];
+    // map Postgres columns to ShopInventoryPage shape
+    const mapped = rows.map((r) => ({
+      _id: r.id ?? r._id ?? r.shop_case_id,
+      name: r.name ?? r.title ?? r.case_name ?? "",
+      quantity: r.quantity ?? r.stock ?? "",
+      amount: r.price ?? r.amount ?? "",
+      discount: r.discount ?? 0,
+      // keep original for reference
+      __raw: r,
+    }));
+    return { data: { data: mapped } };
+  },
+  updateCase: async (id, data) => {
+    // translate UI payload to DB columns (quantity, amount, discount)
+    const payload = {
+      quantity:
+        typeof data.quantity !== "undefined"
+          ? Number(data.quantity)
+          : Number(data.stock) || 0,
+      price:
+        typeof data.amount !== "undefined"
+          ? Number(data.amount)
+          : Number(data.price) || 0,
+      discount: Number(data.discount) || 0,
+    };
+    return await postgresAPI.updateTableRow({
+      table: "shop_cases",
+      id_column: "id",
+      id_value: id,
+      data: payload,
+    });
+  },
+};
+
+export const pgShopItemAPI = {
+  getItems: async () => {
+    const resp = await postgresAPI.getTableRows("shop_items", { limit: 500 });
+    const rows = resp.data?.rows ?? [];
+    const mapped = rows.map((r) => ({
+      _id: r.id ?? r._id ?? r.shop_item_id,
+      name: r.name ?? r.title ?? r.item_name ?? "",
+      quantity: r.quantity ?? r.stock ?? "",
+      amount: r.price ?? r.amount ?? "",
+      discount: r.discount ?? 0,
+      __raw: r,
+    }));
+    return { data: { data: mapped } };
+  },
+  updateItem: async (id, data) => {
+    const payload = {
+      quantity:
+        typeof data.quantity !== "undefined"
+          ? Number(data.quantity)
+          : Number(data.stock) || 0,
+      price:
+        typeof data.amount !== "undefined"
+          ? Number(data.amount)
+          : Number(data.price) || 0,
+      discount: Number(data.discount) || 0,
+    };
+    return await postgresAPI.updateTableRow({
+      table: "shop_items",
+      id_column: "id",
+      id_value: id,
+      data: payload,
+    });
+  },
+};
+
+export const pgRaiderPassAPI = {
+  getPasses: async () => {
+    const resp = await postgresAPI.getTableRows("shop_raider_pass", {
+      limit: 500,
+    });
+    const rows = resp.data?.rows ?? [];
+    const mapped = rows.map((r) => ({
+      _id: r.id ?? r._id ?? r.pass_id,
+      name: r.name ?? r.title ?? "Raider Pass",
+      quantity: r.quantity ?? r.stock ?? "",
+      amount: r.price ?? r.amount ?? "",
+      discount: r.discount ?? 0,
+      __raw: r,
+    }));
+    return { data: { data: mapped } };
+  },
+  updatePass: async (id, data) => {
+    const payload = {
+      quantity:
+        typeof data.quantity !== "undefined"
+          ? Number(data.quantity)
+          : Number(data.stock) || 0,
+      price:
+        typeof data.amount !== "undefined"
+          ? Number(data.amount)
+          : Number(data.price) || 0,
+      discount: Number(data.discount) || 0,
+    };
+    return await postgresAPI.updateTableRow({
+      table: "shop_raider_pass",
+      id_column: "id",
+      id_value: id,
+      data: payload,
+    });
+  },
+};
+
+export const pgShopTicketAPI = {
+  getTickets: async () => {
+    const resp = await postgresAPI.getTableRows("tickets", { limit: 500 });
+    const rows = resp.data?.rows ?? [];
+    const mapped = rows
+      .map((r) => ({
+        _id: r.id ?? r._id ?? r.ticket_id,
+        name: r.name ?? r.title ?? r.subject ?? "",
+        quantity: r.quantity ?? r.stock ?? "",
+        amount: r.amount ?? r.amount ?? "",
+        discount: r.discount ?? 0,
+        __raw: r,
+      }))
+      .sort((a, b) => a.amount - b.amount);
+    return { data: { data: mapped } };
+  },
+  updateTicket: async (id, data) => {
+    const payload = {
+      quantity:
+        typeof data.quantity !== "undefined"
+          ? Number(data.quantity)
+          : Number(data.stock) || 0,
+      amount:
+        typeof data.amount !== "undefined"
+          ? Number(data.amount)
+          : Number(data.price) || 0,
+      discount: Number(data.discount) || 0,
+    };
+    return await postgresAPI.updateTableRow({
+      table: "tickets",
+      id_column: "id",
+      id_value: id,
+      data: payload,
+    });
+  },
 };
 
 export default api;

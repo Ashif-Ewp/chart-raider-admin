@@ -27,6 +27,7 @@ import ShopCasesPage from "./pages/ShopCasesPage";
 import ShopItemsPage from "./pages/ShopItemsPage";
 import ShopTicketsPage from "./pages/ShopTicketsPage";
 import RaiderPassPage from "./pages/RaiderPassPage";
+import SettingsTicketQueue from "./pages/SettingsTicketQueue";
 
 function App() {
   return (
@@ -78,6 +79,10 @@ function App() {
           <Route path="/shop/items" element={<ShopItemsPage />} />
           <Route path="/shop/tickets" element={<ShopTicketsPage />} />
           <Route path="/shop/raider-pass" element={<RaiderPassPage />} />
+          <Route
+            path="/settings/ticket-queue"
+            element={<SettingsTicketQueue />}
+          />
         </Routes>
       </Layout>
       <ToastContainer
