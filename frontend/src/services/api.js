@@ -51,6 +51,16 @@ export const matchAnnouncementAPI = {
   deleteMatchAnnouncement: (id) => api.delete(`/match-announcements/${id}`),
 };
 
+// Match Rule API
+export const matchRuleAPI = {
+  getAll: (params) => api.get("/match-rules", { params }),
+  getById: (id) => api.get(`/match-rules/${id}`),
+  create: (data) => api.post("/match-rules", data),
+  update: (id, data) => api.put(`/match-rules/${id}`, data),
+  remove: (id) => api.delete(`/match-rules/${id}`),
+  getChanges: (params) => api.get("/match-rules/changes/timeline", { params }),
+};
+
 // Ticket Category API
 export const ticketCategoryAPI = {
   getAllTicketCategories: (params) => api.get("/ticket-categories", { params }),
@@ -270,4 +280,3 @@ export const pgShopTicketAPI = {
 };
 
 export default api;
-
