@@ -24,3 +24,4 @@ router.delete("/bonuses/:id", deleteBonus);
 router.patch("/bonuses/:id/toggle", toggleBonusStatus);
 
 module.exports = router;
+

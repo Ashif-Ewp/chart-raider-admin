@@ -21,6 +21,7 @@ import {
   PackageOpen,
   Percent,
   Crown,
+  Gamepad2,
 } from "lucide-react";
 
 const Layout = ({ children }) => {
@@ -80,6 +81,14 @@ const Layout = ({ children }) => {
 
   const isSettingsActive = () => {
     return location.pathname.startsWith("/settings");
+  };
+
+  const isSettingsTicketQueueActive = () => {
+    return location.pathname === "/settings/ticket-queue";
+  };
+
+  const isSettingsGamingToolsActive = () => {
+    return location.pathname === "/settings/gaming-tools";
   };
 
   const toggleSection = (section) => {
@@ -390,13 +399,24 @@ const Layout = ({ children }) => {
                 <Link
                   to="/settings/ticket-queue"
                   className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
-                    isSettingsActive()
+                    isSettingsTicketQueueActive()
                       ? "bg-slate-50 text-slate-700 border border-slate-200"
                       : "text-gray-600 hover:bg-gray-100"
                   }`}
                 >
                   <Ticket size={16} />
                   <span>Ticket Queue</span>
+                </Link>
+                <Link
+                  to="/settings/gaming-tools"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isSettingsGamingToolsActive()
+                      ? "bg-slate-50 text-slate-700 border border-slate-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <Gamepad2 size={16} />
+                  <span>Gaming Tools</span>
                 </Link>
               </div>
             )}
@@ -454,6 +474,10 @@ const Layout = ({ children }) => {
                 {location.pathname === "/shop/items" && "Shop Items"}
                 {location.pathname === "/shop/tickets" && "Shop Tickets"}
                 {location.pathname === "/shop/raider-pass" && "Raider Pass"}
+                {location.pathname === "/settings/ticket-queue" &&
+                  "Ticket Queue"}
+                {location.pathname === "/settings/gaming-tools" &&
+                  "Gaming Tools"}
               </h2>
               <p className="text-gray-600 text-sm mt-1">
                 {location.pathname === "/" && "Overview of your bonus system"}
@@ -500,6 +524,10 @@ const Layout = ({ children }) => {
                   "Manage ticket bundle stock and price points."}
                 {location.pathname === "/shop/raider-pass" &&
                   "Fine-tune Raider Pass inventory and promotional pricing."}
+                {location.pathname === "/settings/ticket-queue" &&
+                  "Edit ticket queue configuration stored in Postgres."}
+                {location.pathname === "/settings/gaming-tools" &&
+                  "Manage user winning balances sourced from Postgres."}
               </p>
             </div>
           </div>

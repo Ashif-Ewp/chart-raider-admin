@@ -28,6 +28,7 @@ import ShopItemsPage from "./pages/ShopItemsPage";
 import ShopTicketsPage from "./pages/ShopTicketsPage";
 import RaiderPassPage from "./pages/RaiderPassPage";
 import SettingsTicketQueue from "./pages/SettingsTicketQueue";
+import SettingsGamingTools from "./pages/SettingsGamingTools";
 
 function App() {
   return (
@@ -82,6 +83,10 @@ function App() {
           <Route
             path="/settings/ticket-queue"
             element={<SettingsTicketQueue />}
+          />
+          <Route
+            path="/settings/gaming-tools"
+            element={<SettingsGamingTools />}
           />
         </Routes>
       </Layout>
