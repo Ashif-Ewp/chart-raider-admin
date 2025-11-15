@@ -23,6 +23,7 @@ import {
   Crown,
   Gamepad2,
   ListChecks,
+  Award,
 } from "lucide-react";
 
 const Layout = ({ children }) => {
@@ -42,6 +43,10 @@ const Layout = ({ children }) => {
 
   const isEquipmentActive = () => {
     return location.pathname.startsWith("/equipment");
+  };
+
+  const isClassBonusActive = () => {
+    return location.pathname.startsWith("/class-bonus");
   };
 
   const isMatchAnnouncementActive = () => {
@@ -144,6 +149,20 @@ const Layout = ({ children }) => {
             >
               <Shield size={18} className="text-purple-500" />
               <span className="font-medium">Equipment items</span>
+            </Link>
+          </div>
+          {/* Class Bonus */}
+          <div>
+            <Link
+              to="/class-bonus"
+              className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors ${
+                isClassBonusActive()
+                  ? "bg-emerald-50 text-emerald-700 border border-emerald-200"
+                  : "text-gray-600 hover:bg-gray-100"
+              }`}
+            >
+              <Award size={18} className="text-emerald-500" />
+              <span className="font-medium">Class Bonus</span>
             </Link>
           </div>
           {/* All Bonus Section */}

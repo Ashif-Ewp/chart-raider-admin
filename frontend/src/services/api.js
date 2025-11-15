@@ -40,6 +40,17 @@ export const equipmentAPI = {
   toggleEquipmentStatus: (id) => api.patch(`/equipment/items/${id}/toggle`),
 };
 
+// Class Bonus API
+export const classBonusAPI = {
+  getAllClassBonuses: (params) => api.get("/class-bonus/items", { params }),
+  getClassBonusById: (id) => api.get(`/class-bonus/items/${id}`),
+  createClassBonus: (data) => api.post("/class-bonus/items", data),
+  updateClassBonus: (id, data) => api.put(`/class-bonus/items/${id}`, data),
+  deleteClassBonus: (id) => api.delete(`/class-bonus/items/${id}`),
+  toggleClassBonusStatus: (id) =>
+    api.patch(`/class-bonus/items/${id}/toggle`),
+};
+
 // Match Announcement API
 export const matchAnnouncementAPI = {
   getAllMatchAnnouncements: (params) =>

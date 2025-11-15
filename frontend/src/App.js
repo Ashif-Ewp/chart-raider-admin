@@ -10,6 +10,9 @@ import EditBonus from "./pages/EditBonus";
 import EquipmentPage from "./pages/EquipmentPage";
 import CreateEquipment from "./pages/CreateEquipment";
 import EditEquipment from "./pages/EditEquipment";
+import ClassBonusPage from "./pages/ClassBonusPage";
+import CreateClassBonus from "./pages/CreateClassBonus";
+import EditClassBonus from "./pages/EditClassBonus";
 import MatchAnnouncementsPage from "./pages/MatchAnnouncementsPage";
 import CreateMatchAnnouncement from "./pages/CreateMatchAnnouncement";
 import EditMatchAnnouncement from "./pages/EditMatchAnnouncement";
@@ -43,6 +46,9 @@ function App() {
           <Route path="/equipment" element={<EquipmentPage />} />
           <Route path="/equipment/create" element={<CreateEquipment />} />
           <Route path="/equipment/edit/:id" element={<EditEquipment />} />
+          <Route path="/class-bonus" element={<ClassBonusPage />} />
+          <Route path="/class-bonus/create" element={<CreateClassBonus />} />
+          <Route path="/class-bonus/edit/:id" element={<EditClassBonus />} />
           <Route
             path="/match-announcements"
             element={<MatchAnnouncementsPage />}
