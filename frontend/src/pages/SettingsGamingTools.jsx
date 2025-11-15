@@ -3,7 +3,7 @@ import { RefreshCcw, Save } from "lucide-react";
 import { toast } from "react-toastify";
 import { postgresAPI } from "../services/api";
 
-const TABLE_NAME = "user_wining_balances";
+const TABLE_NAME = "user_game_tools";
 const DEFAULT_LIMIT = 200;
 
 const readOnlyColumns = new Set([
