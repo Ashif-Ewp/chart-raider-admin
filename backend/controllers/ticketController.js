@@ -39,6 +39,52 @@ const getAllTickets = async (req, res) => {
   }
 };
 
+// @desc    Get user's own tickets
+// @route   GET /api/tickets/user
+// @access  Private (requires user_id in header)
+//TODO [Check session logged in postgresql : LATER]
+const getUserTickets = async (req, res) => {
+  try {
+    // Validation: Check if user_id is present in headers
+    const user_id = req.headers.user_id || req.headers["user-id"];
+
+    if (!user_id) {
+      return res.status(401).json({
+        success: false,
+        message: "Unauthorized: user_id is required in headers",
+      });
+    }
+
+    // Validation: Check if user_id is not empty
+    if (user_id.trim() === "") {
+      return res.status(400).json({
+        success: false,
+        message: "Invalid user_id: cannot be empty",
+      });
+    }
+
+    // Build filter object
+    const filter = { user_id: user_id.trim() };
+
+    // Fetch user's tickets
+    const tickets = await Ticket.find(filter)
+      .populate("category_id", "category description")
+      .sort({ createdAt: -1 });
+
+    res.json({
+      success: true,
+      count: tickets.length,
+      data: tickets,
+    });
+  } catch (error) {
+    res.status(500).json({
+      success: false,
+      message: "Error fetching user tickets",
+      error: error.message,
+    });
+  }
+};
+
 // @desc    Get single ticket by ID
 // @route   GET /api/tickets/:id
 // @access  Public
@@ -179,4 +225,5 @@ module.exports = {
   createTicket,
   updateTicket,
   deleteTicket,
+  getUserTickets,
 };
