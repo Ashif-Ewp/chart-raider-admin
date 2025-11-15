@@ -51,10 +51,10 @@ const MatchRuleCard = ({ rule, onEdit, onDelete }) => {
         </div>
       </div>
 
-      <div className="px-5 py-4">
-        <div className="divide-y divide-gray-200">
+      <div className="px-5 py-4 bg-gray-50">
+        <div className="space-y-2">
           {sortedItems.length === 0 ? (
-            <p className="text-sm text-gray-500 py-4">No entries added yet.</p>
+            <p className="text-sm text-gray-500 py-4 text-center">No entries added yet.</p>
           ) : (
             sortedItems.map((item) => {
               const lastUpdate = formatTimestamp(item.lastChangedAt);
@@ -66,26 +66,32 @@ const MatchRuleCard = ({ rule, onEdit, onDelete }) => {
               return (
                 <div
                   key={item._id || item.label}
-                  className="py-3 flex flex-col md:flex-row md:items-center md:justify-between gap-3"
+                  className="bg-white rounded-lg p-3 border border-gray-200 hover:shadow-sm transition-shadow"
                 >
-                  <div className="flex-1">
-                    <span className="text-xs font-semibold text-gray-500 block uppercase tracking-wide">
-                      {item.label}
-                    </span>
-                    <span className="text-base text-gray-900 font-medium">
-                      {item.value}
-                    </span>
-                    {hasPrevious && (
-                      <div className="flex items-center gap-2 text-xs text-amber-600 mt-1">
-                        <History size={12} />
-                        <span>Previous: {item.previousValue}</span>
+                  <div className="flex items-center justify-between gap-4 mb-2">
+                    <div className="flex items-center gap-4 flex-1 min-w-0">
+                      <div className="min-w-[140px] shrink-0">
+                        <span className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
+                          {item.label}
+                        </span>
                       </div>
+                      <div className="flex-1">
+                        <span className="text-base text-gray-900 font-medium">
+                          {item.value}
+                        </span>
+                      </div>
+                    </div>
+                    {lastUpdate && (
+                      <span className="text-xs text-gray-400 whitespace-nowrap shrink-0">
+                        {lastUpdate}
+                      </span>
                     )}
                   </div>
-                  {lastUpdate && (
-                    <span className="text-xs text-gray-500">
-                      Updated {lastUpdate}
-                    </span>
+                  {hasPrevious && (
+                    <div className="flex items-center gap-2 text-xs text-amber-600 bg-amber-50 rounded px-3 py-1.5 ml-[156px]">
+                      <History size={12} />
+                      <span className="font-medium">Previous: {item.previousValue}</span>
+                    </div>
                   )}
                 </div>
               );
