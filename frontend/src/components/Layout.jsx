@@ -22,6 +22,7 @@ import {
   Percent,
   Crown,
   Gamepad2,
+  ListChecks,
 } from "lucide-react";
 
 const Layout = ({ children }) => {
@@ -89,6 +90,10 @@ const Layout = ({ children }) => {
 
   const isSettingsGamingToolsActive = () => {
     return location.pathname === "/settings/gaming-tools";
+  };
+
+  const isSettingsMatchRulesActive = () => {
+    return location.pathname === "/settings/match-rules";
   };
 
   const toggleSection = (section) => {
@@ -418,6 +423,17 @@ const Layout = ({ children }) => {
                   <Gamepad2 size={16} />
                   <span>Gaming Tools</span>
                 </Link>
+                <Link
+                  to="/settings/match-rules"
+                  className={`flex items-center space-x-3 px-3 py-2 rounded-lg transition-colors text-sm ${
+                    isSettingsMatchRulesActive()
+                      ? "bg-slate-50 text-slate-700 border border-slate-200"
+                      : "text-gray-600 hover:bg-gray-100"
+                  }`}
+                >
+                  <ListChecks size={16} />
+                  <span>Match Rules</span>
+                </Link>
               </div>
             )}
           </div>
@@ -478,6 +494,7 @@ const Layout = ({ children }) => {
                   "Ticket Queue"}
                 {location.pathname === "/settings/gaming-tools" &&
                   "Gaming Tools"}
+                {location.pathname === "/settings/match-rules" && "Match Rules"}
               </h2>
               <p className="text-gray-600 text-sm mt-1">
                 {location.pathname === "/" && "Overview of your bonus system"}
@@ -528,6 +545,8 @@ const Layout = ({ children }) => {
                   "Edit ticket queue configuration stored in Postgres."}
                 {location.pathname === "/settings/gaming-tools" &&
                   "Manage user winning balances sourced from Postgres."}
+                {location.pathname === "/settings/match-rules" &&
+                  "Control the content of match rule cards and review recent edits."}
               </p>
             </div>
           </div>

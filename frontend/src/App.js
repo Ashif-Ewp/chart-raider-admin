@@ -29,6 +29,7 @@ import ShopTicketsPage from "./pages/ShopTicketsPage";
 import RaiderPassPage from "./pages/RaiderPassPage";
 import SettingsTicketQueue from "./pages/SettingsTicketQueue";
 import SettingsGamingTools from "./pages/SettingsGamingTools";
+import SettingsMatchRules from "./pages/SettingsMatchRules";
 
 function App() {
   return (
@@ -87,6 +88,10 @@ function App() {
           <Route
             path="/settings/gaming-tools"
             element={<SettingsGamingTools />}
+          />
+          <Route
+            path="/settings/match-rules"
+            element={<SettingsMatchRules />}
           />
         </Routes>
       </Layout>
