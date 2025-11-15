@@ -6,6 +6,7 @@ const connectDB = require("./config/db");
 const { connectPostgres } = require("./config/postgres");
 const actionBarRoutes = require("./routes/actionBarRoutes");
 const equipmentRoutes = require("./routes/equipmentRoutes");
+const classBonusRoutes = require("./routes/classBonusRoutes");
 const matchAnnouncementRoutes = require("./routes/matchAnnouncementRoutes");
 const matchRuleRoutes = require("./routes/matchRuleRoutes");
 const ticketCategoryRoutes = require("./routes/ticketCategoryRoutes");
@@ -28,6 +29,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Routes
 app.use("/api/actionbar", actionBarRoutes);
 app.use("/api/equipment", equipmentRoutes);
+app.use("/api/class-bonus", classBonusRoutes);
 app.use("/api/match-announcements", matchAnnouncementRoutes);
 app.use("/api/match-rules", matchRuleRoutes);
 app.use("/api/ticket-categories", ticketCategoryRoutes);
